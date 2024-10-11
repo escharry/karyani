@@ -1,0 +1,3 @@
+click==8.1.3          # For creating CLI commands
+tabulate==0.9.0       # For formatting task lists in tables
+rich==13.5.1          # For enhanced terminal output with colors and styles
