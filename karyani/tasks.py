@@ -4,7 +4,7 @@ import os
 TASKS_FILE = 'tasks.json'
 
 class TaskManager:
-    def __init__(self):
+    def __init__(self) -> None:
         # Load tasks from a file or create an empty list if the file doesn't exist
         if os.path.exists(TASKS_FILE):
             with open(TASKS_FILE, 'r') as file:
@@ -12,13 +12,12 @@ class TaskManager:
         else:
             self.tasks = []
 
-    def add_task(self, task: str):
+    def add_task(self, task: str, prio: int) -> None:
         """Add a task and save to file."""
-        self.tasks.append({"task": task, "completed": False})
+        self.tasks.append({"task": task, "priority": prio,"completed": False})
         self.save_tasks()
-        return f'Task added: {task}'
 
-    def list_tasks(self):
+    def list_tasks(self) -> None:
         """List all tasks."""
         if not self.tasks:
             return 'No tasks found.'
@@ -26,18 +25,31 @@ class TaskManager:
     
     def get_all_tasks(self):
         """Return all tasks."""
-        return self.tasks
+        return sorted(self.tasks, key=lambda task: task['priority'])
 
-    def complete_task(self, task_id: int):
+    def complete_task(self, task_id: int) -> str:
         """Mark a task as complete and save to file."""
         if 0 < task_id <= len(self.tasks):
+            if self.tasks[task_id - 1]["completed"]:
+                return f'[yellow]Task {task_id} is already marked as complete![/yellow]'
             self.tasks[task_id - 1]["completed"] = True
             self.save_tasks()
-            return f'Task {task_id} marked as complete.'
+            return f'[green]Task {task_id} marked as complete.[/green]'
         else:
-            return 'Invalid task ID.'
+            return '[red]Invalid task ID.[/red]'
 
-    def save_tasks(self):
+    def clear_completed_tasks(self) -> None:
+        """Clears completed tasks in karyani."""
+        self.tasks = [task for task in self.tasks if not task['completed']]
+        self.save_tasks()
+
+    def clear_all_tasks(self) -> None:
+        """Clears all tasks in karyani."""
+        self.tasks = []
+        self.save_tasks()
+
+    def save_tasks(self) -> None:
         """Save tasks to the tasks.json file."""
+        self.tasks = sorted(self.tasks, key=lambda task: task['priority'])
         with open(TASKS_FILE, 'w') as file:
             json.dump(self.tasks, file)
