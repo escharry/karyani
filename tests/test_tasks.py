@@ -4,13 +4,15 @@ from karyani.cli import main, add, list, complete
 from karyani.tasks import TaskManager
 import os
 
+
 class TestTaskManagerCLI(unittest.TestCase):
 
     def setUp(self):
         """Set up a temporary tasks file for testing."""
         # Use a different file for testing to avoid overwriting real data
         self.test_file = 'test_tasks.json'
-        TaskManager.TASKS_FILE = self.test_file  # Point the task manager to the test file
+        # Point the task manager to the test file
+        TaskManager.TASKS_FILE = self.test_file
         self.runner = CliRunner()
         self.manager = TaskManager()
         # Ensure the test file starts empty
@@ -57,6 +59,7 @@ class TestTaskManagerCLI(unittest.TestCase):
         result = self.runner.invoke(complete, ['999'])  # Non-existent task ID
         self.assertEqual(result.exit_code, 0)
         self.assertIn('Invalid task ID.', result.output)
+
 
 if __name__ == '__main__':
     unittest.main()

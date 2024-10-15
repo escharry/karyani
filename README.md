@@ -56,55 +56,46 @@ karyani add "Buy groceries" --due "2024-10-15" --priority "high"
 karyani list
 ```
 
-### List tasks by priority
+### Filter tasks by priority
 
 ```sh
-karyani list --priority "high"
+karyani list --priority "high" // or karyani list -p "high"
 ```
 
-### List tasks by due date
+### Filter task by status (completed, pending)
 
 ```sh
-karyani list --due "2024-10-15"
+karyani list --status "completed" // or karyani list -s "completed"
 ```
 
-### List tasks by priority and due date
+### Mark a task as done by its id
 
 ```sh
-karyani list --priority "high" --due "2024-10-15"
-```
-
-### Mark a task as done
-
-```sh
-karyani done "Buy groceries"
-```
-
-In all karyani commands, you can use the task index instead of the task name too.
-
-````sh
-### Delete a task
-
-```sh
-karyani delete "Buy groceries"
-````
-
-### Delete all tasks
-
-```sh
-karyani delete --all
+karyani complete 1
 ```
 
 ### Edit a task
 
 ```sh
-karyani edit "Buy groceries and wash car" --due "2024-10-17" --priority "low"
+karyani update "Buy groceries and wash car" --due "2024-10-17" --priority "low"
+```
+
+### Clear a task
+
+```sh
+karyani clear 1
 ```
 
 ### Clear all completed tasks
 
 ```sh
 karyani clear
+```
+
+### Clear all tasks
+
+```sh
+karyani clear -a // or karyani clear --all
 ```
 
 ## Development setup
@@ -115,7 +106,7 @@ Clone this repo and install packages listed in requirements.txt
 pip3 install -r requirements.txt
 ```
 
-## Meta
+---
 
 Esteban Charry – echarry@berkeley.edu
 

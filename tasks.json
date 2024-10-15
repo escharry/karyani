@@ -1,1 +1,1 @@
-[]
+[{"task": "milk", "priority": 1, "completed": true, "due": "today"}, {"task": "cigs", "priority": 3, "completed": true, "due": "-"}, {"task": "yo", "priority": 3, "completed": false, "due": "-"}, {"task": "sandwich", "priority": 3, "completed": false, "due": "-"}, {"task": "Finish homework", "priority": 3, "completed": false, "due": "-"}]
